@@ -14,7 +14,12 @@ public class HelloCommand {
     private GreetingService greetingService;
     ;
     @ShellMethod(key = "hello", value = "Says hello")
-    public String hello(@ShellOption(defaultValue = "World") String name) {
-        return greetingService.getGreeting(name);
+    public String hello(@ShellOption(defaultValue = "World") String name, 
+            @ShellOption(defaultValue = ShellOption.NULL) String name2) {
+        if (name2 != null) {
+            return greetingService.getGreeting(name + " " + name2);
+        } else {
+            return greetingService.getGreeting(name);
+        }
     }
 }
