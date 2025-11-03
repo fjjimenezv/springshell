@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: shell
+  shell:
+    interactive:
+      enabled: true
+
+servidor:
+  path-ficheros: C:/Users/fjimenez/OneDrive/Documentos/Home/Shell
+
+---
+spring:
+  config:
+    activate:
+      on-profile: windows
+
+logging:
+  file: C:/Projects/Personal/logs/shell.log
+
+servidor:
+  path-ficheros: C:/Users/fjimenez/OneDrive/Documentos/Home/Shell
