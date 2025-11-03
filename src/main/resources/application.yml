@@ -8,6 +8,11 @@ spring:
 servidor:
   path-ficheros: C:/Users/fjimenez/OneDrive/Documentos/Home/Shell
 
+logging:
+  file: 
+    name: C:/Projects/Personal/logs/shell.log
+    path: C:/Projects/Personal/logs
+
 ---
 spring:
   config:
@@ -15,7 +20,9 @@ spring:
       on-profile: windows
 
 logging:
-  file: C:/Projects/Personal/logs/shell.log
+  file: 
+    name: C:/Projects/Personal/logs/shell.log
+    path: C:/Projects/Personal/logs
 
 servidor:
   path-ficheros: C:/Users/fjimenez/OneDrive/Documentos/Home/Shell
