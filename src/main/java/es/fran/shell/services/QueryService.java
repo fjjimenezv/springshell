@@ -12,11 +12,28 @@ public class QueryService {
     @Autowired
     private CSVService csvService;
 
-    public String getQuery(String value) {
-        List<InventoryObject> inventoryService = csvService.findAllByFTS(value);
-        inventoryService.forEach(x -> {
-            System.out.println(x.toString());
-        });
+    public String getQuery(String type, String value) {
+        switch (type) {
+            case "ft":
+                List<InventoryObject> inventoryList = csvService.findAllByFTS(value);
+                inventoryList.forEach(x -> {
+                    System.out.println(x.toString());
+                });                
+                break;
+
+            case "pa":
+                return csvService.calculateContainersString(Integer.valueOf(value));
+        
+            case "ta":
+                List<InventoryObject> tagInventoryList = csvService.findAllContainingPropertyAndValue("tag", value);
+                tagInventoryList.forEach(x -> {
+                    System.out.println(x.toString());
+                });
+                break;
+
+            default:
+                break;
+        }
         return "What's up, " + value + "!";
     }
 }

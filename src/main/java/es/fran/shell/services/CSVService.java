@@ -117,6 +117,15 @@ public class CSVService {
 		csvObjetos.close();
 	}
 
+	public String calculateContainersString(Integer id) {
+		Optional<InventoryObject> inventoryObjectOpt = findById(id);
+		if (inventoryObjectOpt.isEmpty()) {
+			return "";
+		} else {
+			return calculateContainersString(inventoryObjectOpt.get());
+		}
+	}
+
 	public String calculateContainersString(InventoryObject inventoryObject) {
 		if (inventoryObject.getParent() == null || inventoryObject.getParent() == 0) {
 			return "";

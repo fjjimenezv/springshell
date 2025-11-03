@@ -28,7 +28,15 @@ public class HelloCommand {
     }
 
     @ShellMethod(key = "q", value = "Query")
-    public String query(@ShellOption String value) {
-        return queryService.getQuery(value);
+    public String query(@ShellOption(help = "ft (full-text), pa (parents), ta (tag)") String type, @ShellOption(help = "texto si es ft o id si es pa") String value) {
+        if (type == null) {
+            return "Se debe especificar un tipo de consulta: ft (full-text), pa (parents), ta (tag)";
+        }
+
+        if (value == null) {
+            return "Se debe especificar un valor: texto si es ft o id si es pa";
+        }
+
+        return queryService.getQuery(type, value);
     }    
 }
