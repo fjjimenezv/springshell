@@ -16,6 +16,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -32,6 +33,12 @@ public class ShellApplication {
 
 	@Autowired
 	CSVService csvService;	
+
+	@Value("${servidor.path-ficheros}")
+	private String pathFicheros;	
+
+	@Value("${servidor.path-google}")
+	private String pathGoogle;
 
 	public static void main(String[] args) {
 		try {
@@ -116,17 +123,11 @@ public class ShellApplication {
     public void destroy() throws IOException {
         System.out.println(
           "Callback triggered - @PreDestroy.");
-		// csvService.writeCSV();
-		/**
+		csvService.writeCSV();
 		Files.copy(
-				Paths.get(strRutaOneDriveCSV),
-				Paths.get(strRutaICloud),
-				StandardCopyOption.REPLACE_EXISTING);		
-		Files.copy(
-				Paths.get(strRutaOneDriveCSV),
-				Paths.get(strRutaGoogle),
+				Paths.get(pathFicheros + "/" + ShellConstants.SHELL_OBJETOS_CSV),
+				Paths.get(pathGoogle + "/" + ShellConstants.SHELL_OBJETOS_CSV),
 				StandardCopyOption.REPLACE_EXISTING);
-				*/
     }	
 
 	@EventListener(ApplicationReadyEvent.class)

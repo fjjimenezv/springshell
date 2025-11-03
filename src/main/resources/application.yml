@@ -7,6 +7,7 @@ spring:
 
 servidor:
   path-ficheros: C:/Users/fjimenez/OneDrive/Documentos/Home/Shell
+  path-google: G:/Mi unidad/Databases
 
 logging:
   file: 
