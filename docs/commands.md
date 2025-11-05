@@ -3,9 +3,11 @@
 - qry query
 - add add
 - upd update
-- sub submit
 - del delete
 - sel select
+- key clave
+- val valor
+- nav navegación
 
 ## Query (commando qry)
 
@@ -24,14 +26,17 @@ Si seleccionamos un item, nos mostrará sus parents y los detalles del mismo.
 
 > sel 855
 
-Piso Terrassa Av Barcelona:Comedor:F02
-id:855, parent:850, label:Estados Unidos. Agosto 2004, generic:Fotoprix, tag:recuerdos:fotografías y video:album de fotos
+id: 855
+01 parent: 850 Piso Terrassa Av Barcelona:Comedor:F02
+02 label:Estados Unidos. Agosto 2004
+03 generic:Fotoprix
+04 tag:recuerdos:fotografías y video:album de fotos
 
-## Editar
+## CRUD de un registro
 
-### Añadir una propiedad y valor
+### Añadir propiedad
 
-> edi add prop {valor}
+> add key {valor}
 
 Mostrará la lista de propiedades a utilizar. 
 1. generic
@@ -39,12 +44,16 @@ Mostrará la lista de propiedades a utilizar.
 
     Si se introduce un valor filtrará la lista por ese valor
     
-    > edi add prop ta
+    > add key ta
     1. tag
 
 Propiedades de tags. Si se introduce un valor filtrará
-> pro 1 {valor}
+> key 1 {valor}
 1. recuerdos:fotograrías y video: album de fotos
+
+> key perico
+
+Introduce una clave a medida
 
 Tomará el tercer registro como valor
 > val 3
@@ -52,20 +61,66 @@ Tomará el tercer registro como valor
 Tomará el texto como valor
 > val Estados Unidos
 
-### Actualizar una propiedad y valor
+### Borrar propiedad
 
-> edi upd prop
-
-Mostrará la lista de tuplas de propiedad y valor
-
-1. generic:Fotoprix
-2. tag:recuerdos:fotografías y video:album de fotos
-
-> del 1
+> del 4
 
 Borrará la primera propiedad
 
-> edi 2 {valor}
+### Actualizar propiedad
 
-Editará el valor de la tupla 2. Mostrará la lista de valores posibles, filtrando opcionalmente por valor. 
+> upd 2 {valor}
+
+Editará el valor de la tupla 2. En primer lugar mostrará el valor actual (valor 0), y a continuación mostrará la lista de valores posibles, filtrando opcionalmente por valor. 
+0. recuerdos:fotograrías y video: album de fotos
 1. recuerdos:fotograrías y video: album de fotos
+
+> val 1
+
+## Añadir (add)
+
+- Añadir un hijo del registro seleccionado (**chi**ld, hijo)
+
+> add chi 
+
+- Añadir un hermano o sibling (**sib**ling, mismo padre) del registro seleccionado
+
+> add sib
+
+- Añadir un registro en la raíz (**roo**t)
+
+> add roo
+
+- Añadir una propiedad al registro seleccionado
+
+> add key {valor}
+
+## Navegar (nav)
+
+Cuando se ha seleccionado que se quiere editar un valor con jerarquía, se puede navegar abajo y arriba.
+
+Supongamos que nuestro contexto es
+
+id: 855
+01 parent: 850 Piso Terrassa Av Barcelona:Comedor:F02
+02 label:Estados Unidos. Agosto 2004
+
+Editamos el campo de parent
+
+> upd 1
+0. 850 Piso Terrassa Av Barcelona:Comedor:F02
+
+> nav up
+1. 850 Piso Terrassa Av Barcelona:Comedor
+
+> nav sib
+1. 850 Piso Terrassa Av Barcelona:Comedor:F03
+2. 850 Piso Terrassa Av Barcelona:Comedor:F04
+
+> nav dow
+1. 850 Piso Terrassa Av Barcelona:Comedor:F02:caja1
+2. 850 Piso Terrassa Av Barcelona:Comedor:F02:caja2
+
+Como en los otros casos, en el momento que deseemos, indicamos 
+
+> val 1
